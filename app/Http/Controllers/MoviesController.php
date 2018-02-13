@@ -15,23 +15,13 @@ class MoviesController extends Controller
         return Movie::find($id);
     }
 
-     public function store(){
-        $movie = new Movie;
-
-        $movie->name = request('name');
-        $movie->director = request('director');
-        $movie->imageUrl = request('imageUrl');
-        $movie->duration = request('duration');
-        $movie->releaseDate = request('releaseDate');
-        $movie->genres = request('genres');
-
-
-        $movie->save();
-
+     public function store(MovieRequest $request ){
+         
+        return Movie::create($request->all());
 
     }
 
-     public function update(Request $request, $id)
+     public function update(MovieRequest $request, $id)
     {
         $movie = Movie::find($id);
         $movie->update($request->all());
