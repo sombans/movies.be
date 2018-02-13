@@ -8,9 +8,9 @@ use App\Movie;
 class MoviesController extends Controller
 {
      public function index(){
-        $name = request()->input('name');
-            if ($name) {
-                return Movie::where('name', 'LIKE', '%'.$name.'%')->get();
+        $term = request()->input('term');
+            if ($term) {
+                return Movie::search($term);
             } 
             else {
                 return Movie::all();
