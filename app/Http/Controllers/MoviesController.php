@@ -8,7 +8,14 @@ use App\Movie;
 class MoviesController extends Controller
 {
      public function index(){
-        return Movie::all();
+        $name = request()->input('name');
+            if ($name) {
+                return Movie::where('name', 'LIKE', '%'.$name.'%')->get();
+            } 
+            else {
+                return Movie::all();
+                
+            }
     }
 
      public function show($id){
@@ -16,7 +23,7 @@ class MoviesController extends Controller
     }
 
      public function store(MovieRequest $request ){
-         
+
         return Movie::create($request->all());
 
     }
